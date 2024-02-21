@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = 'top'>
+    <h1 align="center">{% block title %}Архив новостей{% endblock %}</h1>
+    <br>
+    {% for arc in archive %}
+    <div class='card mb-5' >
+          <div class="card-header">
+              <strong class='sourse'>{{ arc[1] }}</strong>
+              <span class='news_data'>{{ arc[2] }}</span>
+          </div>
+            <div class='card-body' >
+            {% if arc[5] is not none %}
+                <a href="{{ arc[4] }}"><img class='news_img' src="{{ arc[5] }}"></a>
+            {% else %}
+                <a href="{{ arc[4] }}"><img class='news_img' src="{{ url_for('static', filename='img/temple.png') }}"></a>
+            {% endif %}
+            <a class='url_news' id='url_news' href="{{ arc[4]}}" target='_blank'>{{ arc[3] }}</a>
+            </div>
+        <form action="/archive" name="form"  class="form" method="post">
+                <input type="hidden" name="name" value="{{ arc[0] }}" />
+                <input type="submit" class ="btn" value="Удалить"/>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+<!--    <script>-->
+
+<!-- window.onload =  $(function() {-->
+<!--      $('.form').submit(function(e) {-->
+<!--        var $form = $(this);-->
+<!--        $.ajax({-->
+<!--          type: $form.attr('method'),-->
+<!--          url: $form.attr('action'),-->
+<!--          data: $form.serialize()-->
+<!--        }).done(function(response) {-->
+<!--         $('#data').html(response);-->
+<!--         console.log('success');-->
+<!--        }).fail(function() {-->
+<!--          console.log('fail');-->
+<!--        });-->
+<!--        e.preventDefault();-->
+<!--      });-->
+<!--    });-->
+<!--    </script>-->
+{% endblock %}

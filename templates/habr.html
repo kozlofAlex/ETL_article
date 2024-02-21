@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = 'top'>
+    <h1 align="center">{% block title %}Хабр карьера{% endblock %}</h1>
+    <br>
+    {% for vacancion in vacancies %}
+    <div class="card mb-5">
+          <div class="card-header">
+               <strong class='sourse'>{{ vacancion['Источник'] }}</strong>
+            </div>
+        <div class='vacancies card-body' >
+            <p>{{ vacancion['Компания'] }}</p>
+            <img class='company_img' src="{{ vacancion['Картинка'] }}">
+            <a class='url' href="{{ vacancion['Ссылка']}}" target='_blank'>{{ vacancion['Вакансия'] }}</a>
+            <hr>
+            {% if vacancion['Описание'] is none %}
+                <p class='requirement'></p>
+            {% else %}
+                <p class='requirement'>{{ vacancion['Описание'] }}</p>
+            {% endif %}
+
+            {% if vacancion['Требования'] is none %}
+            <p class='responsibility'></p>
+            {% else %}
+            <p class='responsibility'>{{ vacancion['Требования'] }}</p>
+            {% endif %}
+        </div>
+    <div class="card-footer text-muted">
+    <span class='data'>{{ vacancion['Дата публикации'] }}</span>
+    </div>
+    </div>
+    {% endfor %}
+</div>>
+{% endblock %}

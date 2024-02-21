@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='top' xmlns="http://www.w3.org/1999/html">
+    <h1 align="center">{% block title %}Новые статьи{% endblock %}</h1>
+        <form method="POST" name="update">
+            <input type="submit" class="btn btn-dark" name="spec" value="Загрузить новые" />
+        </form>
+    <br>
+    {% for new in news %}
+    <div class='card mb-5' >
+          <div class="card-header">
+              <strong class='sourse'>{{ new[1] }}</strong>
+              <span class='news_data'>{{ new[2] }}</span>
+          </div>
+            <div class='card-body' >
+            {% if new[5] is not none %}
+                <a href="{{ new[4] }}"><img class='news_img' src="{{ new[5] }}"></a>
+            {% else %}
+                <a href="{{ new[4] }}"><img class='news_img' src="{{ url_for('static', filename='img/temple.png') }}"></a>
+            {% endif %}
+            <a class='url_news' id='url_news' href="{{ new[4]}}" target='_blank'>{{ new[3] }}</a>
+            </div>
+            <form action="/send" name="form"  class="form" method="post">
+                <input type="hidden" name="name" value="{{ new[3] }}" />
+                 {% if new[6] == 1 %}
+                <p>В архиве</p>
+                {% else %}
+                <input type="submit" class ="btn block" value="Отправить"/>
+                {% endif %}
+            </form>
+
+    </div>
+    {% endfor %}
+
+</div>
+    <script>
+
+ window.onload =  $(function() {
+      $('.form').submit(function(e) {
+        var $form = $(this);
+        $.ajax({
+          type: $form.attr('method'),
+          url: $form.attr('action'),
+          data: $form.serialize()
+        }).done(function(response) {
+         $('#data').html(response);
+         $(".block").css("display", "none;");
+         console.log('success');
+        }).fail(function() {
+          console.log('fail');
+        });
+        e.preventDefault();
+      });
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = 'top'>
+    <h1 align="center">{% block title %}HH{% endblock %}</h1>
+        <form method="POST">
+            <input type="submit" class="btn btn-dark" name="spec" value="Обновить" />
+        </form>
+    <br>
+    {% for vacancion in vacancies %}
+    <div class="card mb-5">
+          <div class="card-header">
+               <strong class='sourse'>{{ vacancion[1] }}</strong>
+            </div>
+        <div class='vacancies card-body' >
+            <a class='company' href="{{ vacancion[9] }}" target='_blank'>{{ vacancion[8] }}</a>
+            {% if vacancion[10] is not none %}
+                <a href="{{ vacancion[9] }}"><img class='company_img' src="{{ vacancion[10] }}"></a>
+            {% else %}
+                <a href="{{ vacancion[9] }}"><img class='company_img' src="{{ url_for('static', filename='img/no_foto.png') }}"></a>
+            {% endif %}
+            {% if vacancion[5] is none %}
+                {% if vacancion[6] is none %}
+                     <p class='salary'><i class="bi-cash-coin" style="font-size: 1rem;"></i> ЗП не указана</p>
+                {% else %}
+                    <p class='salary'><i class="bi-cash-coin" style="font-size: 1rem;"></i> До {{ vacancion[6] }} {{ vacancion[7] }}</p>
+                {% endif %}
+            {% else %}
+                {% if vacancion[6] is none %}
+                    <p class='salary'><i class="bi-cash-coin" style="font-size: 1rem;"></i> От {{ vacancion[5] }} {{ vacancion[7] }}</p>
+                {% else %}
+                    <p class='salary'><i class="bi-cash-coin" style="font-size: 1rem;"></i> {{ vacancion[5]}} - {{ vacancion[6] }} {{ vacancion[7] }}</p>
+                {% endif %}
+            {% endif %}
+            <p class='experience'><i class="bi bi-bar-chart-fill" style="font-size: 1rem;"></i> {{ vacancion[13] }}</p>
+            <a class='url' href="{{ vacancion[4]}}" target='_blank'>{{ vacancion[3] }}</a>
+            <hr>
+            {% if vacancion[11] is none %}
+                <p class='requirement'></p>
+            {% else %}
+                <p class='requirement'>{{ vacancion[11] }}</p>
+            {% endif %}
+
+            {% if vacancion[12] is none %}
+            <p class='responsibility'></p>
+            {% else %}
+            <p class='responsibility'>{{ vacancion[12] }}</p>
+            {% endif %}
+        </div>
+    <div class="card-footer text-muted">
+    <span class='data'>{{ vacancion[2] }}</span>
+    </div>
+    </div>
+    {% endfor %}
+</div>>
+{% endblock %}

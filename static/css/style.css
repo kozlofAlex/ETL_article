@@ -1,0 +1,50 @@
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+        .company_img {
+                max-width: 120px;
+                max-height: 120px;
+                margin: 20px;
+                float: right;
+        }
+
+        a {
+                text-decoration: none;
+        }
+
+        .top{
+                width: 55%;
+                margin: auto
+        }
+
+        .company{
+                font-size: 18px;
+        }
+
+        .data{
+                font-size: 12px;
+
+        }
+
+        .url{
+                font-size: 20px;
+
+        }
+        .salary{
+                font-size: 18px;
+
+        }
+        .img_nav{
+                height: 50px;
+        }
+        .news_img{
+                max-width: 150px;
+                max-height: 150px;
+                float: right;
+
+        }
+
+        .news_data{
+                float: right;
+                font-size: 12px;
+        }
+
